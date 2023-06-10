@@ -1,0 +1,13 @@
+{
+  ethereum {
+    address(address: {is: "0x43cf525d63987d17052d9891587bcfb9592c3ee2"}) {
+      balances(currency: {is: "ETH"}, date: {till: "2022-05-01"}) {
+        history {
+          transferAmount
+          value
+          timestamp
+        }
+      }
+    }
+  }
+}
