@@ -16,7 +16,7 @@ export async function getFirstTxTime(address: string) {
               addressStats(address: {is: "${address}"}) {
                 address {
                   firstTxAt {
-                    time
+                    iso8601
                     
                   }
                 }
@@ -34,10 +34,9 @@ export async function getFirstTxTime(address: string) {
       }
     );
     const time = await response.data.data.ethereum.addressStats[0].address
-      .firstTxAt;
-    const timeISO = convertToISO8601DateTime(time.time);
-    console.log(timeISO);
-    const hash: any = await getFirstTxHash(address, timeISO);
+      .firstTxAt.iso8601;
+    console.log(time);
+    const hash: any = await getFirstTxHash(address, time);
   } catch (error) {
     console.error(error);
   }
