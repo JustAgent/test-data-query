@@ -1,9 +1,10 @@
-const query = `{
-    ethereum {
-      dexTrades(
-        options: {desc: "block.height"}
-        makerOrTaker: {is: "0x3f09b08cebe5637ca134c5a20870362367bfd45e"}
-      ) {
+import axios from "axios";
+import { apiBitQuery } from "../constants";
+
+export async function getAllTxData(address: string) {
+  const query = `query ($address: String) {
+    ethereum(network: ethereum) {
+      dexTrades(options: {desc: "block.height"}, makerOrTaker: {is: $address}) {
         transaction {
           hash
           gasValue
@@ -20,11 +21,11 @@ const query = `{
           }
         }
         tradeIndex
-        date {
-          date
-        }
         block {
           height
+          timestamp {
+            time
+          }
         }
         buyAmount
         buyAmountInUsd: buyAmount(in: USD)
@@ -47,64 +48,9 @@ const query = `{
       }
     }
   }
-  `;
-
-export async function getTokenPriceUSDTBanch(address: string) {
-  const query = `{
-      ethereum {
-        dexTrades(
-          options: {desc: "block.height"}
-          makerOrTaker: {is: "0x3f09b08cebe5637ca134c5a20870362367bfd45e"}
-        ) {
-          transaction {
-            hash
-            gasValue
-            gasPrice
-            gas
-          }
-          smartContract {
-            address {
-              address
-            }
-            contractType
-            currency {
-              name
-            }
-          }
-          tradeIndex
-          date {
-            date
-          }
-          block {
-            height
-          }
-          buyAmount
-          buyAmountInUsd: buyAmount(in: USD)
-          buyCurrency {
-            symbol
-            address
-          }
-          sellCurrency {
-            symbol
-            address
-          }
-          tradeAmount(in: ETH)
-          transaction {
-            hash
-            gasValue
-            gasPrice
-            gas
-          }
-          sellAmountInUsd: sellAmount(in: USD)
-        }
-      }
-    }
     `;
   const variables = {
-    strings: [formattedAddresses[4]],
-    actualNetwork: `${actualNetwork}`,
-    limit: 10,
-    usdtAddress: usdtAddress,
+    makerOrTrader: address,
   };
   try {
     const response = await axios.post(
@@ -120,12 +66,8 @@ export async function getTokenPriceUSDTBanch(address: string) {
         },
       }
     );
-    let price = response.data;
-    console.log(price);
-    if (!price) {
-      price = 0;
-    }
-    return price;
+    let res = response.data;
+    console.log(res);
   } catch (error) {
     console.error(error);
   }

@@ -3,7 +3,6 @@ import { apiBitQuery } from "../constants";
 import dotenv from "dotenv";
 dotenv.config();
 
-// Sorted by time | Last = length - 1
 export async function getAllTransactions(address: string) {
   try {
     const limit = 25000;
