@@ -13,7 +13,7 @@ export async function getAllUserTokens(address: string, network: string) {
         query getAllUserTokens {
             EVM(dataset: combined, network: ${network}) {
               BalanceUpdates(
-                where: {BalanceUpdate: {Address: {is: "0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5"}}, Currency: {Fungible: true}}
+                where: {BalanceUpdate: {Address: {is: "${address}"}}, Currency: {Fungible: true}}
                 orderBy: {descendingByField: "balance"}
               ) {
                 Currency {

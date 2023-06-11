@@ -13,13 +13,14 @@ async function main() {
   // 1)
   //   await getFirstTxTime(address);
   // 2)
-  await getTotalBalance(address, ["eth", "bsc"]);
+  //   await getTotalBalance(address, ["eth", "bsc"]);
+  // 3)
+  await getBalanceHistory(address);
 
   //   await getAllTransactions(address);
   //   await getAllTxData(address);
   //   await getAllUserTokens(address);
   //   await getTokenPriceUSDT("0xF04eDcD6e2764dc2574413f31156785605f62d78")
-  //   await getBalanceHistory();
 }
 
 main().catch((err) => {
