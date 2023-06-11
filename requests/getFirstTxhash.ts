@@ -34,8 +34,8 @@ export async function getFirstTxHash(address: string, date: string) {
         },
       }
     );
-    const time = response.data.data.ethereum;
-    console.log(time);
+    const hash = response.data.data.ethereum.transactions[0].hash;
+    return hash;
   } catch (error) {
     console.error(error);
   }

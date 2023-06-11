@@ -50,7 +50,7 @@ export async function getAllTxData(address: string) {
   }
     `;
   const variables = {
-    makerOrTrader: address,
+    address: address,
   };
   try {
     const response = await axios.post(
