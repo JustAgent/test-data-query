@@ -10,6 +10,7 @@ export async function getTokenPriceUSDTSingle(
   let token = address;
   let usdtAddress = "0x55d398326f99059fF775485246999027B3197955"; // BNB usdt
   let actualNetwork = network;
+
   if (network === "eth") {
     actualNetwork = "ethereum";
     usdtAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
@@ -17,12 +18,14 @@ export async function getTokenPriceUSDTSingle(
       token = "ETH";
     }
   }
+
   if (network === "bsc") {
     usdtAddress = "0x55d398326f99059fF775485246999027B3197955";
     if (token == "0x") {
       token = "BNB";
     }
   }
+
   if (token === "0xd31d2c3c4619e6bdde0f6248add5e3fadd494aa9") {
     return 0;
   }
@@ -70,6 +73,7 @@ export async function getTokenPriceUSDTSingle(
     if (!price) {
       price = 0;
     }
+
     return price;
   } catch (error) {
     console.error(error);

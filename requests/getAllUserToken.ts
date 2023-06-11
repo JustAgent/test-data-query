@@ -5,7 +5,7 @@ dotenv.config();
 
 export async function getAllUserTokens(address: string, network: string) {
   try {
-    console.log(network);
+    console.log(`Network: ${network}`);
     const response = await axios.post(
       apiBitStream,
       {
@@ -36,7 +36,7 @@ export async function getAllUserTokens(address: string, network: string) {
       }
     );
     const currencies = response.data.data.EVM.BalanceUpdates;
-    // console.log(currencies);
+    console.log(`All user's tokens: `, currencies);
     return currencies;
   } catch (error) {
     console.error(error);
