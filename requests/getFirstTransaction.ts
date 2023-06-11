@@ -1,7 +1,6 @@
 import axios from "axios";
 import { apiBitQuery } from "../constants";
 import dotenv from "dotenv";
-import { convertToISO8601DateTime } from "../utils/toISO8601";
 import { getFirstTxHash } from "./getFirstTxhash";
 dotenv.config();
 

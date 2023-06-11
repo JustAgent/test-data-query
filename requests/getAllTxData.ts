@@ -1,5 +1,7 @@
 import axios from "axios";
 import { apiBitQuery } from "../constants";
+import dotenv from "dotenv";
+dotenv.config();
 
 export async function getAllTxData(address: string) {
   const query = `query ($address: String) {
@@ -49,9 +51,11 @@ export async function getAllTxData(address: string) {
     }
   }
     `;
+
   const variables = {
     address: address,
   };
+
   try {
     const response = await axios.post(
       apiBitQuery,
@@ -66,9 +70,9 @@ export async function getAllTxData(address: string) {
         },
       }
     );
-    let res = response.data;
+    let res = response.data.data.ethereum.dexTrades;
     console.log(res);
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error(error.status);
   }
 }
