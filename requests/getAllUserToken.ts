@@ -1,9 +1,14 @@
 import axios from "axios";
 import { apiBitStream, apiBitQuery } from "../constants";
 import dotenv from "dotenv";
+import { saveToCSV4 } from "../utils/saveToCSV";
 dotenv.config();
 
-export async function getAllUserTokens(address: string, network: string) {
+export async function getAllUserTokens(
+  address: string,
+  network: string,
+  flag?: boolean
+) {
   const startTime = performance.now();
 
   try {
@@ -26,8 +31,6 @@ export async function getAllUserTokens(address: string, network: string) {
               }
             }
           }
-          
-          
         `,
       },
       {
@@ -41,7 +44,12 @@ export async function getAllUserTokens(address: string, network: string) {
     console.log(`All user's tokens: `, currencies);
     const endTime = performance.now();
     const executionTime = endTime - startTime;
-    console.log(executionTime);
+    console.log(`Execution time: ${executionTime} ms`);
+    if (flag) {
+      const filePath = `logs/4.csv`;
+      saveToCSV4(filePath, currencies, executionTime);
+    }
+
     return currencies;
   } catch (error) {
     console.error(error);

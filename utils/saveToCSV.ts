@@ -73,3 +73,35 @@ export function saveToCSV3(
       console.error("Error occurred while saving data to CSV:", error);
     });
 }
+
+export function saveToCSV4(
+  filePath: string,
+  data: any[],
+  executionTime: number
+) {
+  console.log("Data to be saved:", data); // Debug logging
+
+  const dataWithExecutionTime = data.map((item: any) => ({
+    name: item.Currency.Name,
+    smartContract: item.Currency.SmartContract,
+    balance: item.balance,
+  }));
+
+  const csvWriter = createObjectCsvWriter({
+    path: filePath,
+    header: [
+      { id: "name", title: "Name" },
+      { id: "smartContract", title: "Smart Contract" },
+      { id: "balance", title: "Balance" },
+    ],
+  });
+
+  csvWriter
+    .writeRecords(dataWithExecutionTime)
+    .then(() => {
+      console.log(`Saved data to CSV file: ${filePath}`);
+    })
+    .catch((error: any) => {
+      console.error("Error occurred while saving data to CSV:", error);
+    });
+}
