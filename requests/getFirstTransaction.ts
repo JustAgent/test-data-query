@@ -2,7 +2,7 @@ import axios from "axios";
 import { apiBitQuery } from "../constants";
 import dotenv from "dotenv";
 import { createFolderIfNotExists } from "../utils/createFolderIfNotExists";
-import { saveToCSV } from "../utils/saveToCSV";
+import { saveToCSV1 } from "../utils/saveToCSV";
 import path from "path";
 dotenv.config();
 
@@ -56,7 +56,7 @@ export async function getFirstTxTime(address: string) {
     console.log(`Execution time: ${executionTime} ms`);
 
     data.push({ time: `Execution Time: ${executionTime} ms` });
-    saveToCSV(filePath, data);
+    saveToCSV1(filePath, data);
   } catch (error) {
     console.error(error);
   }
