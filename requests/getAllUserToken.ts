@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function getAllUserTokens(address: string, network: string) {
+  const startTime = performance.now();
+
   try {
     console.log(`Network: ${network}`);
     const response = await axios.post(
@@ -37,6 +39,9 @@ export async function getAllUserTokens(address: string, network: string) {
     );
     const currencies = response.data.data.EVM.BalanceUpdates;
     console.log(`All user's tokens: `, currencies);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime);
     return currencies;
   } catch (error) {
     console.error(error);

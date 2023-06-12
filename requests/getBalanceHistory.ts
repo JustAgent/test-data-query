@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function getBalanceHistory(address: string) {
+  const startTime = performance.now();
   try {
     const query = `
     query getBalanceHistory($address: String) {
         ethereum(network: ethereum) {
           address(address: {is: $address}) {
             balances(currency: {is: "ETH"}, 
-              date: {since: "2023-04-18", till: "2024-04-18"}
               ) 
               {
               currency {
@@ -45,6 +45,9 @@ export async function getBalanceHistory(address: string) {
     );
     const res = response.data.data.ethereum.address[0].balances[0].history;
     console.log(res);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(`Execution time: ${executionTime} ms`);
   } catch (error) {
     console.error(error);
   }

@@ -5,6 +5,8 @@ import { getFirstTxHash } from "./getFirstTxhash";
 dotenv.config();
 
 export async function getFirstTxTime(address: string) {
+  const startTime = performance.now();
+
   const query = `
   query getFirstTxData($address: String) {
       ethereum(network: ethereum) {
@@ -35,11 +37,15 @@ export async function getFirstTxTime(address: string) {
         },
       }
     );
+
     const time = await response.data.data.ethereum.addressStats[0].address
       .firstTxAt.iso8601;
     console.log(`Time: ${time}`);
-    const hash: any = await getFirstTxHash(address, time);
-    console.log(`Tx hash: ${hash}`);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime);
+    // const hash: any = await getFirstTxHash(address, time);
+    // console.log(`Tx hash: ${hash}`);
   } catch (error) {
     console.error(error);
   }

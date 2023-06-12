@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function getAllTxData(address: string) {
+  const startTime = performance.now();
   const query = `query ($address: String) {
     ethereum(network: ethereum) {
       dexTrades(options: {desc: "block.height"}, makerOrTaker: {is: $address}) {
@@ -72,6 +73,9 @@ export async function getAllTxData(address: string) {
     );
     let res = response.data.data.ethereum.dexTrades;
     console.log(res);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime);
   } catch (error: any) {
     console.error(error.status);
   }
