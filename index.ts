@@ -10,13 +10,13 @@ async function main() {
   // 1)
   // await getFirstTxTime(address);
   // 2)
-  await getTotalBalance(address, ["eth", "bsc"]);
+  // await getTotalBalance(address, ["eth", "bsc"]);
   // 3)
   // await getBalanceHistory(address);
   // 4)
   // await getTotalBalance(address, ["eth", "bsc"]);
   // 5)
-  // await getAllUserTokens(address, "eth", true);
+  await getAllUserTokens(address, "eth", true);
   // 6)
   // await getAllTxData(address);
 }

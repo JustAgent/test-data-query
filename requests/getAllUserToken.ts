@@ -1,7 +1,7 @@
 import axios from "axios";
 import { apiBitStream, apiBitQuery } from "../constants";
 import dotenv from "dotenv";
-import { saveToCSV4 } from "../utils/saveToCSV";
+import { saveToCSV5 } from "../utils/saveToCSV";
 dotenv.config();
 
 export async function getAllUserTokens(
@@ -47,7 +47,7 @@ export async function getAllUserTokens(
     console.log(`Execution time: ${executionTime} ms`);
     if (flag) {
       const filePath = `logs/4.csv`;
-      saveToCSV4(filePath, currencies, executionTime);
+      saveToCSV5(filePath, currencies, executionTime);
     }
 
     return currencies;
