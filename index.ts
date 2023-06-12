@@ -10,9 +10,9 @@ async function main() {
   // 1)
   // await getFirstTxTime(address);
   // 2)
-  await getTotalBalance(address, ["eth", "bsc"]);
+  // await getTotalBalance(address, ["eth", "bsc"]);
   // 3)
-  // await getBalanceHistory(address);
+  await getBalanceHistory(address);
   // 4)
   // await getTotalBalance(address, ["eth", "bsc"]);
   // 5)

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiBitQuery } from "../constants";
 import dotenv from "dotenv";
+import { saveToCSV3 } from "../utils/saveToCSV";
 dotenv.config();
 
 export async function getBalanceHistory(address: string) {
@@ -47,6 +48,9 @@ export async function getBalanceHistory(address: string) {
     console.log(res);
     const endTime = performance.now();
     const executionTime = endTime - startTime;
+
+    const filePath = `logs/3.csv`;
+    saveToCSV3(filePath, res, executionTime);
     console.log(`Execution time: ${executionTime} ms`);
   } catch (error) {
     console.error(error);
