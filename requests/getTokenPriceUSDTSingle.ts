@@ -70,7 +70,7 @@ export async function getTokenPriceUSDTSingle(
       }
     );
     let price = response.data.data.ethereum.dexTrades[0]?.quotePrice;
-    if (!price) {
+    if (!price || price === "undefined") {
       price = 0;
     }
 

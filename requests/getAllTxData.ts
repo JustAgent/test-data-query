@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiBitQuery } from "../constants";
 import dotenv from "dotenv";
+import { saveToCSV6 } from "../utils/saveToCSV";
 dotenv.config();
 
 export async function getAllTxData(address: string) {
@@ -75,7 +76,12 @@ export async function getAllTxData(address: string) {
     console.log(res);
     const endTime = performance.now();
     const executionTime = endTime - startTime;
-    console.log(executionTime);
+
+    const filePath = `logs/6.csv`;
+    saveToCSV6(filePath, res, executionTime);
+    console.log(`Execution time: ${executionTime} ms`);
+
+    return res;
   } catch (error: any) {
     console.error(error.status);
   }

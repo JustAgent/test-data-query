@@ -46,7 +46,7 @@ export async function getAllUserTokens(
     const executionTime = endTime - startTime;
     console.log(`Execution time: ${executionTime} ms`);
     if (flag) {
-      const filePath = `logs/4.csv`;
+      const filePath = `logs/5.csv`;
       saveToCSV5(filePath, currencies, executionTime);
     }
 

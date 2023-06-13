@@ -13,10 +13,13 @@ export async function getTotalBalance(address: string, networks: string[]) {
         return new Promise<number>(async (resolve) => {
           setTimeout(async () => {
             try {
-              const tokenPrice = await getTokenPriceUSDTSingle(
+              let tokenPrice = await getTokenPriceUSDTSingle(
                 Currency.SmartContract,
                 network
               );
+              if (!tokenPrice) {
+                tokenPrice = 0;
+              }
               console.log(`Price of ${Currency.SmartContract} = ${tokenPrice}`);
               const value = parseFloat(tokenPrice) * parseFloat(balance);
               resolve(value);
